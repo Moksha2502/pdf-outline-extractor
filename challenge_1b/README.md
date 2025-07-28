@@ -1,6 +1,4 @@
 
-
-```markdown
 # Challenge 1B: Persona-Driven Document Intelligence
 
 ## 🚀 Overview
