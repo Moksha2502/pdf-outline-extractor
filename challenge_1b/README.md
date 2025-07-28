@@ -174,13 +174,3 @@ pip install -r requirements.txt
 
 ---
 
-## 📬 Contact
-
-For queries or clarifications, feel free to reach out via GitHub Issues.
-
----
-
-```
-
-Let me know if you also want the `approach_explanation.md`, `persona_extractor.py`, or `requirements.txt`.
-```
