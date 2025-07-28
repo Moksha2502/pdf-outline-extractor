@@ -1,5 +1,4 @@
 # pdf-outline-extractor
-Here is a **professional summary** of both main `README.md` files for **Challenge 1A** and **Challenge 1B** of the Adobe India Hackathon 2025:
 
 ---
 
