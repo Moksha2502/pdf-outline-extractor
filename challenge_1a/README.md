@@ -1,27 +1,28 @@
-Here is a professionally rewritten `README.md` tailored to your actual working code for Challenge 1A, including full alignment with the Adobe "Connecting the Dots" Round 1A requirements.
 
 
-📘 Challenge 1A: PDF Structure Extraction
+---
 
- Overview
+# 📘 Challenge 1A: PDF Structure Extraction
 
-This repository contains a containerized solution for Challenge 1Aof Adobe's  Connecting the Dots Hackathon 2025. The goal is to extract a structured outline (including title and headings of levels H1–H3) from PDF documents and generate valid JSON files for each input document.
+## Overview
 
-This solution is optimized for accuracy, speed, and compliance with resource constraints, and is built to run inside a Docker container in an offline AMD64 CPU-only environment.
+This repository contains a containerized solution for **Challenge 1A** of Adobe's *Connecting the Dots* Hackathon 2025. The goal is to extract a structured outline (including title and headings of levels H1–H3) from PDF documents and generate valid JSON files for each input document.
 
+This solution is optimized for **accuracy, speed**, and **compliance with resource constraints**, and is built to run inside a Docker container in an **offline AMD64 CPU-only environment**.
 
+---
 
- 🚀 Features
+## 🚀 Features
 
-* Detects and extracts title and headings (H1, H2) from PDFs
-* Outputs structured JSON files per document
+* Detects and extracts **title** and **headings** (H1, H2) from PDFs
+* Outputs structured **JSON files** per document
 * Handles a variety of PDFs including forms, reports, and books
 * Runs efficiently in Docker within the 10-second time limit
 * Fully offline and compliant with memory and CPU limits
 
+---
 
-
-🗂 Directory Structure
+## 🗂 Directory Structure
 
 ```
 challenge_1a/
@@ -30,19 +31,19 @@ challenge_1a/
 ├── input/                  # Folder for input PDF files (mounted at /app/input)
 ├── output/                 # Folder for generated JSON files (mounted at /app/output)
 └── README.md               # You're reading it
+```
 
+---
 
+## ⚙️ How to Build and Run
 
-
- ⚙️ How to Build and Run
-
-🔧 Step 1: Build the Docker Image
+### 🔧 Step 1: Build the Docker Image
 
 ```bash
 docker build --platform linux/amd64 -t pdf-processor .
 ```
 
-▶️ Step 2: Run the Processor on Input Files
+### ▶️ Step 2: Run the Processor on Input Files
 
 ```bash
 docker run --rm \
@@ -54,7 +55,7 @@ docker run --rm \
 
 ---
 
- 📄 Output Format
+## 📄 Output Format
 
 The output is a `.json` file for each `.pdf` file in the `input` folder, matching the schema defined below:
 
@@ -68,45 +69,46 @@ The output is a `.json` file for each `.pdf` file in the `input` folder, matchin
 }
 ```
 
-Title: Extracted from the top 3 pages using font-size heuristics.
-Headings:
+* **Title**: Extracted from the top 3 pages using font-size heuristics.
+* **Headings**:
 
-  1: Large prominent section headings
-  H2: Subheadings based on size and positioning
-
-
-
- 🧠 Implementation Logic
-
-The extraction logic in `process_pdfs.py` includes:
-
-PDF parsing using PyMuPDF (fitz) for efficient and lightweight access
- Font size-based heuristics to infer heading levels
- Page-wise scanning to identify valid headings and skip noise
- Deduplication and filtering of headings using rules
+  * H1: Large prominent section headings
+  * H2: Subheadings based on size and positioning
 
 ---
 
- 🧪 Testing Strategy
+## 🧠 Implementation Logic
 
-✅ Simple PDFs: Text-only and academic-style documents
-✅ Complex Layouts: Government forms, stylized reports
-✅ Performance: Tested for ≤ 10 seconds on 50-page files
+The extraction logic in `process_pdfs.py` includes:
 
+* PDF parsing using **PyMuPDF (fitz)** for efficient and lightweight access
+* Font size-based heuristics to infer heading levels
+* Page-wise scanning to identify valid headings and skip noise
+* Deduplication and filtering of headings using rules
 
+---
 
- ✅ Requirements Checklist
+## 🧪 Testing Strategy
 
-[x] Automatically processes all PDFs in `/app/input`
-[x] Generates valid JSON per file in `/app/output`
-[x] Conforms to output schema
-[x] Runs fully offline (no network access)
-[x] Executes within 10 seconds for 50 pages
-[x] Memory ≤ 16GB | CPU ≤ 8 cores
-[x] Model size ≤ 200MB (none used)
+* ✅ **Simple PDFs**: Text-only and academic-style documents
+* ✅ **Complex Layouts**: Government forms, stylized reports
+* ✅ **Performance**: Tested for ≤ 10 seconds on 50-page files
 
+---
 
-🐳 Dockerfile (in root)
+## ✅ Requirements Checklist
+
+* [x] Automatically processes all PDFs in `/app/input`
+* [x] Generates valid JSON per file in `/app/output`
+* [x] Conforms to output schema
+* [x] Runs fully offline (no network access)
+* [x] Executes within 10 seconds for 50 pages
+* [x] Memory ≤ 16GB | CPU ≤ 8 cores
+* [x] Model size ≤ 200MB (none used)
+
+---
+
+## 🐳 Dockerfile (in root)
 
 ```dockerfile
 FROM --platform=linux/amd64 python:3.10-slim
@@ -121,7 +123,7 @@ CMD ["python", "process_pdfs.py"]
 
 ---
 
-📁 Example Input/Output
+## 📁 Example Input/Output
 
 | Input File (PDF)      | Output File (JSON)     |
 | --------------------- | ---------------------- |
@@ -132,8 +134,17 @@ All outputs are stored in `/app/output`.
 
 ---
 
-📌 Notes
+## 📌 Notes
 
- No external models or APIs are used — this is a rule-based implementation.
-If you're using this as a base, you may integrate a small ML model (≤ 200MB) in the future to enhance classification.
+* No external models or APIs are used — this is a rule-based implementation.
+* If you're using this as a base, you may integrate a small ML model (≤ 200MB) in the future to enhance classification.
 
+---
+
+## 📬 Contact
+
+If you have any questions or feedback, feel free to reach out via GitHub Issues (if permitted) or contact your team lead.
+
+---
+
+Let me know if you'd like a **prewritten `process_pdfs.py`** with improved logic or a **sample GitHub repo** template zip to help you upload directly.
