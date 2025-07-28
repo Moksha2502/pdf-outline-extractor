@@ -1,63 +1,61 @@
 
 
+```markdown
+# Challenge 1B: Persona-Driven Document Intelligence
 
-📘 Challenge 1B: Persona-Driven Document Intelligence
+## 🚀 Overview
 
-🧩 Overview
+This repository contains the solution to **Round 1B** of the Adobe India Hackathon 2025. The objective is to develop an intelligent PDF processing system that extracts and prioritizes the most relevant sections from a collection of PDFs based on a **persona** and a **job-to-be-done**.
 
-This repository contains the solution for **Round 1B** of the Adobe India Hackathon 2025. The objective is to develop an intelligent PDF analysis system that extracts and ranks the most relevant content from a set of documents based on a user-defined **persona** and a **job-to-be-done**.
-
-The solution is fully containerized with Docker, runs offline on CPU, and generates structured, insightful output in the specified JSON format.
-
----
-
- 🎯 Problem Statement
-
-You are given:
-- A collection of **3 to 10 PDF documents**
-- A `persona.json` file describing a user role and a task
-
-You must build a system that:
-- Extracts semantically relevant sections from the PDFs
-- Ranks the sections in order of importance
-- Summarizes the most relevant subsections
-- Returns a structured output in JSON format
+The solution is fully containerized using Docker, runs **offline on CPU**, and processes PDF collections to generate structured and ranked insights.
 
 ---
 
- 📁 Repository Structure
+## 🎯 Challenge Objective
+
+Design and build a system that:
+- Accepts a **set of 3–10 PDF documents**
+- Accepts a **persona** and a **job-to-be-done**
+- Extracts **relevant sections** from the PDFs
+- Ranks extracted sections by **importance**
+- Provides **refined sub-section summaries**
+- Outputs a structured JSON file conforming to the required schema
+
+---
+
+## 📂 Folder Structure
 
 ```
 
 challenge\_1b/
-├── Dockerfile                  # Docker configuration
-├── persona\_extractor.py       # Main processing script
-├── requirements.txt           # Python dependencies
-├── input/                     # Input PDFs and persona JSON
+├── Dockerfile
+├── persona\_extractor.py
+├── requirements.txt
+├── input/
 │   ├── doc1.pdf
 │   ├── doc2.pdf
 │   └── persona.json
-├── output/                    # Output directory (populated at runtime)
-│   └── output.json
-├── sample\_dataset/            # (Optional) test cases or schemas
-│   ├── input/
-│   └── output\_schema.json
-├── approach\_explanation.md    # Explanation of the methodology
-└── README.md                  # This documentation
+├── output/
+│   └── output.json (generated)
+├── sample\_dataset/
+│   ├── input/ (optional test PDFs)
+│   ├── output\_schema.json
+├── README.md
+├── approach\_explanation.md
 
 ````
 
 ---
 
- ⚙️ Execution Guide
+## ⚙️ Docker Instructions
 
- 🔧 Build Docker Image
+### 🔧 Build the Docker Image
 
 ```bash
 docker build --platform linux/amd64 -t persona-analyzer .
 ````
 
- ▶️ Run Docker Container
+### ▶️ Run the Docker Container
 
 ```bash
 docker run --rm \
@@ -67,39 +65,38 @@ docker run --rm \
   persona-analyzer
 ```
 
-> 🔐 The input directory is mounted as read-only. No internet access is permitted within the container.
+* Input PDFs and `persona.json` should be in the `input/` folder.
+* Output `output.json` will be saved in the `output/` folder.
+* The container is run in a **read-only, no-network environment** as required.
 
 ---
 
-📦 Input Format
+## 📌 Input Specification
 
- 1. Documents
+### 1. PDF Documents
 
-A folder containing 3–10 PDF files (e.g., `doc1.pdf`, `doc2.pdf`, etc.).
+* A collection of **3 to 10 PDF files** placed in the `/app/input` directory.
+* Must be research papers, reports, textbooks, or any domain documents.
 
- 2. Persona File (`persona.json`)
-
-Example:
+### 2. Persona File (`persona.json`)
 
 ```json
 {
   "persona": "PhD Researcher in Computational Biology",
-  "job_to_be_done": "Prepare a literature review on graph neural networks for drug discovery"
+  "job_to_be_done": "Prepare a comprehensive literature review focusing on methodologies, datasets, and performance benchmarks"
 }
 ```
 
 ---
 
-## ✅ Output Format
-
-The expected output is a structured JSON file with the following schema:
+## ✅ Output Format (`output.json`)
 
 ```json
 {
   "metadata": {
     "documents": ["doc1.pdf", "doc2.pdf"],
-    "persona": "PhD Researcher in Computational Biology",
-    "job_to_be_done": "Prepare a literature review on graph neural networks",
+    "persona": "...",
+    "job_to_be_done": "...",
     "processed_at": "2025-07-26T18:00:00Z"
   },
   "extracted_sections": [
@@ -108,13 +105,14 @@ The expected output is a structured JSON file with the following schema:
       "page": 3,
       "section_title": "Graph Attention Networks",
       "importance_rank": 1
-    }
+    },
+    ...
   ],
   "subsection_analysis": [
     {
       "document": "doc1.pdf",
       "page": 3,
-      "refined_text": "Graph Attention Networks are effective for drug discovery...",
+      "refined_text": "Graph Attention Networks improve prediction accuracy in drug discovery by weighting neighborhood nodes...",
       "section_title": "Graph Attention Networks"
     }
   ]
@@ -125,70 +123,66 @@ The expected output is a structured JSON file with the following schema:
 
 ## 🧠 Methodology Summary
 
-See [`approach_explanation.md`](./approach_explanation.md) for a complete explanation of:
+See [`approach_explanation.md`](./approach_explanation.md) for a detailed description of:
 
-* Text extraction techniques
-* Relevance scoring logic
-* Section ranking strategy
-* Subsection summarization pipeline
-
----
-
- ✅ Constraints Met
-
-| Constraint            | Status             |
-| --------------------- | ------------------ |
-| CPU-only              | ✅ Supported        |
-| Model size ≤ 1GB      | ✅ Compliant        |
-| Processing time ≤ 60s | ✅ Optimized        |
-| Offline / No network  | ✅ Fully Air-gapped |
-| Architecture: AMD64   | ✅ Compatible       |
+* How persona + job drive relevance
+* How sections are ranked
+* NLP techniques and logic used for summarization
+* Trade-offs and optimizations
 
 ---
 
- 📚 Dependencies
+## ✅ Constraints Met
 
-All dependencies are listed in `requirements.txt` and installed during Docker build.
+| Constraint               | Status          |
+| ------------------------ | --------------- |
+| CPU Only                 | ✅ Yes           |
+| ≤ 1GB model size         | ✅ Yes           |
+| ≤ 60 sec processing time | ✅ Optimized     |
+| No Internet Access       | ✅ Fully Offline |
+| Docker AMD64 Support     | ✅ Supported     |
 
-Key libraries:
+---
 
-`PyMuPDF` for PDF parsing
- `transformers` (optional) for summarization
- `nltk`, `scikit-learn`, `json`, `datetime` for NLP and logic
+## 🧪 Testing Suggestions
 
-To install locally:
+Test with different combinations:
+
+* Business reports + Analyst persona
+* Academic papers + Researcher persona
+* Education content + Student persona
+
+---
+
+## 📚 Dependencies
+
+* `PyMuPDF` – PDF text and layout extraction
+* `transformers` (if used) – Lightweight summarization
+* `nltk`, `re`, `json`, `datetime`
+
+Install dependencies via:
 
 ```bash
 pip install -r requirements.txt
 ```
 
+---
 
+## 🔒 Important Notes
 
-🔍 Testing Guidelines
+* All processing is **offline**
+* No hardcoded values, filenames, or logic
+* Supports cross-platform and diverse document types
 
-Test with diverse combinations of:
+---
 
-* PDF complexity (layouts, languages, formats)
-* Persona types (student, analyst, researcher, etc.)
-* Job objectives (summarize, review, extract)
+## 📬 Contact
 
+For queries or clarifications, feel free to reach out via GitHub Issues.
 
+---
 
-📑 Validation Checklist
+```
 
-[x] Input PDFs and persona are processed correctly
-[x] Output is generated as `output.json`
-[x] Section ranking reflects persona needs
-[x] Subsection summaries are relevant
-[x] Output conforms to required schema
-[x] Container executes within constraints
-
-
-📬 Contact & Support
-
-For clarifications or collaboration, please use the GitHub issue tracker.
-
-All logic is generic and does not rely on hardcoded values. No external APIs are used. The container is built to comply strictly with the competition rules.
-
-
-
+Let me know if you also want the `approach_explanation.md`, `persona_extractor.py`, or `requirements.txt`.
+```
