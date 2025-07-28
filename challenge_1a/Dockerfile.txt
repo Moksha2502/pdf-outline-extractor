@@ -1,0 +1,11 @@
+FROM --platform=linux/amd64 python:3.10-slim
+
+WORKDIR /app
+
+RUN apt-get update && \
+    apt-get install -y libglib2.0-0 libsm6 libxext6 libxrender-dev poppler-utils && \
+    pip install --no-cache-dir pymupdf
+
+COPY process_pdfs.py .
+
+CMD ["python", "process_pdfs.py"]
