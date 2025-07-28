@@ -140,11 +140,3 @@ All outputs are stored in `/app/output`.
 * If you're using this as a base, you may integrate a small ML model (≤ 200MB) in the future to enhance classification.
 
 ---
-
-## 📬 Contact
-
-If you have any questions or feedback, feel free to reach out via GitHub Issues (if permitted) or contact your team lead.
-
----
-
-Let me know if you'd like a **prewritten `process_pdfs.py`** with improved logic or a **sample GitHub repo** template zip to help you upload directly.
